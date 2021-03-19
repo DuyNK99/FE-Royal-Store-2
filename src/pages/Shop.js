@@ -75,6 +75,9 @@ const Shop = () => {
   useEffect(() => {
     const delayed = setTimeout(() => {
       fetchProducts({ query: text });
+      if (!text) {
+        loadAllProducts();
+      }
     }, 300);
     return () => clearTimeout(delayed);
   }, [text]);
@@ -102,7 +105,6 @@ const Shop = () => {
     setTimeout(() => {
       setOk(!ok);
     }, 300);
-    
   };
 
   // 4. load products based on category
