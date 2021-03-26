@@ -10,10 +10,10 @@ import {
 } from "@ant-design/icons";
 
 const ProductCardInCheckout = ({ p }) => {
-  const colors = ["Black", "Brown", "Silver", "White", "Blue"];
+  const materials = ["Wood", "Metal", "Glasses", "Leather ", "Plastic"];
   let dispatch = useDispatch();
 
-  const handleColorChange = (e) => {
+  const handleMaterialChange = (e) => {
     console.log("color changed", e.target.value);
 
     let cart = [];
@@ -24,7 +24,7 @@ const ProductCardInCheckout = ({ p }) => {
 
       cart.map((product, i) => {
         if (product._id === p._id) {
-          cart[i].color = e.target.value;
+          cart[i].material = e.target.value;
         }
       });
 
@@ -104,20 +104,19 @@ const ProductCardInCheckout = ({ p }) => {
         </td>
         <td>{p.title}</td>
         <td>${p.price}</td>
-        <td>{p.brand}</td>
         <td>
           <select
-            onChange={handleColorChange}
-            name="color"
+            onChange={handleMaterialChange}
+            name="material"
             className="form-control"
           >
-            {p.color ? (
-              <option value={p.color}>{p.color}</option>
+            {p.material ? (
+              <option value={p.material}>{p.material}</option>
             ) : (
               <option>Select</option>
             )}
-            {colors
-              .filter((c) => c !== p.color)
+            {materials
+              .filter((c) => c !== p.material)
               .map((c) => (
                 <option key={c} value={c}>
                   {c}

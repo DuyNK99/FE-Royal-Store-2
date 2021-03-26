@@ -15,7 +15,7 @@ import {
 } from "@ant-design/icons";
 import Star from "../components/forms/Star";
 
-const { SubMenu, ItemGroup } = Menu;
+const { SubMenu} = Menu;
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
@@ -27,22 +27,8 @@ const Shop = () => {
   const [star, setStar] = useState("");
   const [subs, setSubs] = useState([]);
   const [sub, setSub] = useState("");
-  const [brands, setBrands] = useState([
-    "Apple",
-    "Samsung",
-    "Microsoft",
-    "Lenovo",
-    "ASUS",
-  ]);
-  const [brand, setBrand] = useState("");
-  const [colors, setColors] = useState([
-    "Black",
-    "Brown",
-    "Silver",
-    "White",
-    "Blue",
-  ]);
-  const [color, setColor] = useState("");
+  const [materials, setMaterials] = useState(["Wood", "Metal", "Glasses", "Leather ", "Plastic"]);
+  const [material, setMaterial] = useState("");
   const [shipping, setShipping] = useState("");
 
   let dispatch = useDispatch();
@@ -99,8 +85,7 @@ const Shop = () => {
     setPrice(value);
     setStar("");
     setSub("");
-    setBrand("");
-    setColor("");
+    setMaterial("");
     setShipping("");
     setTimeout(() => {
       setOk(!ok);
@@ -135,8 +120,7 @@ const Shop = () => {
     setPrice([0, 0]);
     setStar("");
     setSub("");
-    setBrand("");
-    setColor("");
+    setMaterial("");
     setShipping("");
     // console.log(e.target.value);
     let inTheState = [...categoryIds];
@@ -167,8 +151,7 @@ const Shop = () => {
     setCategoryIds([]);
     setStar(num);
     setSub("");
-    setBrand("");
-    setColor("");
+    setMaterial("");
     setShipping("");
     fetchProducts({ stars: num });
   };
@@ -206,56 +189,27 @@ const Shop = () => {
     setPrice([0, 0]);
     setCategoryIds([]);
     setStar("");
-    setBrand("");
-    setColor("");
+    setMaterial("");
     setShipping("");
     fetchProducts({ sub });
   };
 
-  // 7. show products based on brand name
-  const showBrands = () =>
-    brands.map((b) => (
-      <Radio
-        value={b}
-        name={b}
-        checked={b === brand}
-        onChange={handleBrand}
-        className="pb-1 pl-4 pr-4"
-      >
-        {b}
-      </Radio>
-    ));
-
-  const handleBrand = (e) => {
-    setSub("");
-    dispatch({
-      type: "SEARCH_QUERY",
-      payload: { text: "" },
-    });
-    setPrice([0, 0]);
-    setCategoryIds([]);
-    setStar("");
-    setColor("");
-    setBrand(e.target.value);
-    setShipping("");
-    fetchProducts({ brand: e.target.value });
-  };
 
   // 8. show products based on color
-  const showColors = () =>
-    colors.map((c) => (
+  const showMaterials = () =>
+  materials.map((c) => (
       <Radio
         value={c}
         name={c}
-        checked={c === color}
-        onChange={handleColor}
+        checked={c === material}
+        onChange={handleMaterial}
         className="pb-1 pl-4 pr-4"
       >
         {c}
       </Radio>
     ));
 
-  const handleColor = (e) => {
+  const handleMaterial = (e) => {
     setSub("");
     dispatch({
       type: "SEARCH_QUERY",
@@ -264,10 +218,9 @@ const Shop = () => {
     setPrice([0, 0]);
     setCategoryIds([]);
     setStar("");
-    setBrand("");
-    setColor(e.target.value);
+    setMaterial(e.target.value);
     setShipping("");
-    fetchProducts({ color: e.target.value });
+    fetchProducts({ material: e.target.value });
   };
 
   // 9. show products based on shipping yes/no
@@ -302,8 +255,7 @@ const Shop = () => {
     setPrice([0, 0]);
     setCategoryIds([]);
     setStar("");
-    setBrand("");
-    setColor("");
+    setMaterial("");
     setShipping(e.target.value);
     fetchProducts({ shipping: e.target.value });
   };
@@ -378,31 +330,18 @@ const Shop = () => {
               </div>
             </SubMenu>
 
-            {/* brands */}
-            <SubMenu
-              key="5"
-              title={
-                <span className="h6">
-                  <DownSquareOutlined /> Brands
-                </span>
-              }
-            >
-              <div style={{ maringTop: "-10px" }} className="pr-5">
-                {showBrands()}
-              </div>
-            </SubMenu>
 
             {/* colors */}
             <SubMenu
               key="6"
               title={
                 <span className="h6">
-                  <DownSquareOutlined /> Colors
+                  <DownSquareOutlined /> Materials
                 </span>
               }
             >
               <div style={{ maringTop: "-10px" }} className="pr-5">
-                {showColors()}
+                {showMaterials()}
               </div>
             </SubMenu>
 

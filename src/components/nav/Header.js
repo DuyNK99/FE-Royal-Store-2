@@ -9,7 +9,7 @@ import {
   ShoppingOutlined,
   ShoppingCartOutlined,
 } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import firebase from "firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -40,63 +40,120 @@ const Header = () => {
   };
 
   return (
-    <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
-      <Item key="home" icon={<AppstoreOutlined />}>
-        <Link to="/">Home</Link>
-      </Item>
+    <>
+      <nav className="nav_wrap">
+        <div className="container-fluid">
+          <div className="row row_wrap">
+            <div className="col-lg-2">
+              <Link to="/" className="navbar-logo">
+                <img className="navbar-logo-img" src="/images/royalLogo.png"></img>
+              </Link>
+            </div>
+            <div className="col-lg-10">
+              <div className="row">
+                <div className="col-lg-6">
+                  <div>
+                    <ul >
+                      <h3>Your Are Best</h3>
+                    </ul>
+                  </div>
+                </div>
+                <div className="col-lg-6">
+                  <Menu
+                    onClick={handleClick}
+                    selectedKeys={[current]}
+                    mode="horizontal"
+                  >
+                    {!user && (
+                      <Item
+                        key="register"
+                        icon={<UserAddOutlined />}
+                        className="float-right"
+                      >
+                        <Link to="/register">Register</Link>
+                      </Item>
+                    )}
 
-      <Item key="shop" icon={<ShoppingOutlined />}>
-        <Link to="/shop">Shop</Link>
-      </Item>
+                    {!user && (
+                      <Item
+                        key="login"
+                        icon={<UserOutlined />}
+                        className="float-right"
+                      >
+                        <Link to="/login">Login</Link>
+                      </Item>
+                    )}
 
-      <Item key="cart" icon={<ShoppingCartOutlined />}>
-        <Link to="/cart">
-          <Badge count={cart.length} offset={[9, 0]}>
-            Cart
-          </Badge>
-        </Link>
-      </Item>
+                    {user && (
+                      <SubMenu
+                        icon={<SettingOutlined />}
+                        title={user.email && user.email.split("@")[0]}
+                        className="float-right"
+                      >
+                        {user && user.role === "subscriber" && (
+                          <Item>
+                            <Link to="/user/history">Dashboard</Link>
+                          </Item>
+                        )}
 
-      {!user && (
-        <Item key="register" icon={<UserAddOutlined />} className="float-right">
-          <Link to="/register">Register</Link>
-        </Item>
-      )}
+                        {user && user.role === "admin" && (
+                          <Item>
+                            <Link to="/admin/dashboard">Dashboard</Link>
+                          </Item>
+                        )}
 
-      {!user && (
-        <Item key="login" icon={<UserOutlined />} className="float-right">
-          <Link to="/login">Login</Link>
-        </Item>
-      )}
+                        <Item icon={<LogoutOutlined />} onClick={logout}>
+                          Logout
+                        </Item>
+                      </SubMenu>
+                    )}
+                    <Item
+                      key="cart"
+                      icon={<ShoppingCartOutlined />}
+                      className="float-right"
+                    >
+                      <Link to="/cart">
+                        <Badge count={cart.length} offset={[9, 0]}>
+                          Cart
+                        </Badge>
+                      </Link>
+                    </Item>
+                  </Menu>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-lg-8">
+                  <Menu
+                    onClick={handleClick}
+                    selectedKeys={[current]}
+                    mode="horizontal"
+                  >
+                    <Item key="home" icon={<AppstoreOutlined />}>
+                      <Link to="/">Home</Link>
+                    </Item>
 
-      {user && (
-        <SubMenu
-          icon={<SettingOutlined />}
-          title={user.email && user.email.split("@")[0]}
-          className="float-right"
-        >
-          {user && user.role === "subscriber" && (
-            <Item>
-              <Link to="/user/history">Dashboard</Link>
-            </Item>
-          )}
-
-          {user && user.role === "admin" && (
-            <Item>
-              <Link to="/admin/dashboard">Dashboard</Link>
-            </Item>
-          )}
-
-          <Item icon={<LogoutOutlined />} onClick={logout}>
-            Logout
-          </Item>
-        </SubMenu>
-      )}
-
-      <span className="float-right p-1">
-        <Search />
-      </span>
-    </Menu>
+                    <Item key="shop" icon={<ShoppingOutlined />}>
+                      <Link to="/shop">Shop</Link>
+                    </Item>
+                  </Menu>
+                </div>
+                <div className="col-lg-4">
+                  <Menu
+                    onClick={handleClick}
+                    selectedKeys={[current]}
+                    mode="horizontal"
+                  >
+                    <span className="float-right p-1">
+                      <Search />
+                    </span>
+                  </Menu>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </>
   );
 };
 

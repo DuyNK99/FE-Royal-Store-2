@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { Card, Tooltip } from "antd";
 import { EyeOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import laptop from "../../images/bugatti-divo-red-performance-ac.jpg";
 import { Link } from "react-router-dom";
 import { showAverage } from "../../functions/rating";
 import _ from "lodash";
 import { useSelector, useDispatch } from "react-redux";
+import "../../App.css";
 
-const { Meta } = Card;
+
 
 const ProductCard = ({ product }) => {
   const [tooltip, setTooltip] = useState("Click to add");
@@ -59,12 +59,11 @@ const ProductCard = ({ product }) => {
       ) : (
         <div className="text-center pt-1 pb-3">No rating yet</div>
       )}
-
-      <Card
+      {/* <Card
         cover={
           <img
             src={images && images.length ? images[0].url : laptop}
-            style={{ height: "150px", objectFit: "cover" }}
+            style={{ height: "150px", objectFit: "cover", width: "330px"}}
             className="p-1"
           />
         }
@@ -79,12 +78,46 @@ const ProductCard = ({ product }) => {
             </a>
           </Tooltip>,
         ]}
-      >
+        style={{ width: "330px"}}>
         <Meta
           title={`${title} - $${price}`}
           description={`${description && description.substring(0, 40)}...`}
         />
-      </Card>
+      </Card> */}
+      <div class="product-grid">
+        <div class="product-image">
+          <Link to={`/product/${slug}`} class="image">
+            <img
+              src={images && images.length ? images[0].url : laptop}
+              style={{objectFit: "cover", height: "300px", width: "300px"}}
+              className="p-1"
+            />
+          </Link>
+          <ul class="product-links">
+            <li>
+              {" "}
+              <Link to={`/product/${slug}`}>
+                <EyeOutlined/> <br /> View Product
+              </Link>
+            </li>
+            <li>
+              {" "}
+              
+                <a onClick={handleAddToCart} disabled={product.quantity < 1}>
+                  <ShoppingCartOutlined/> <br />
+                  {product.quantity < 1 ? "Out of stock" : "Add to Cart"}
+                </a>
+             
+            </li>
+          </ul>
+        </div>
+        <div class="product-content">
+          <h3 class="product-title">
+            <a href="#">{`${title}`}</a>
+          </h3>
+          <div class="price">{`$${price}`}</div>
+        </div>
+      </div>
     </>
   );
 };

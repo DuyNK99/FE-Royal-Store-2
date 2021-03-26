@@ -23,10 +23,8 @@ const ProductCreateForm = ({
     shipping,
     quantity,
     images,
-    colors,
-    brands,
-    color,
-    brand,
+    materials,
+    material
   } = values;
 
   return (
@@ -89,10 +87,10 @@ const ProductCreateForm = ({
       </div>
 
       <div className="form-group">
-        <label>Color</label>
-        <select name="color" className="form-control" onChange={handleChange}>
+        <label>Material</label>
+        <select name="material" className="form-control" onChange={handleChange}>
           <option>Please select</option>
-          {colors.map((c) => (
+          {materials.map((c) => (
             <option key={c} value={c}>
               {c}
             </option>
@@ -100,17 +98,7 @@ const ProductCreateForm = ({
         </select>
       </div>
 
-      <div className="form-group">
-        <label>Brand</label>
-        <select name="brand" className="form-control" onChange={handleChange}>
-          <option>Please select</option>
-          {brands.map((b) => (
-            <option key={b} value={b}>
-              {b}
-            </option>
-          ))}
-        </select>
-      </div>
+
 
       <div className="form-group">
         <label>Category</label>

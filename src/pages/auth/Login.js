@@ -6,10 +6,11 @@ import { MailOutlined, GoogleOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { createOrUpdateUser } from "../../functions/auth";
+import "../../App.css";
 
 const Login = ({ history }) => {
-  const [email, setEmail] = useState("gqlreactnode@gmail.com");
-  const [password, setPassword] = useState("gggggg");
+  const [email, setEmail] = useState("duysu1045@gmail.com");
+  const [password, setPassword] = useState("duy10123456");
   const [loading, setLoading] = useState(false);
 
   const { user } = useSelector((state) => ({ ...state }));
@@ -94,7 +95,6 @@ const Login = ({ history }) => {
             roleBasedRedirect(res);
           })
           .catch((err) => console.log(err));
-        // history.push("/");
       })
       .catch((err) => {
         console.log(err);
@@ -103,7 +103,7 @@ const Login = ({ history }) => {
   };
 
   const loginForm = () => (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="login-form">
       <div className="form-group">
         <input
           type="email"
@@ -138,21 +138,8 @@ const Login = ({ history }) => {
       >
         Login with Email/Password
       </Button>
-    </form>
-  );
-
-  return (
-    <div className="container p-5">
-      <div className="row">
-        <div className="col-md-6 offset-md-3">
-          {loading ? (
-            <h4 className="text-danger">Loading...</h4>
-          ) : (
-            <h4>Login</h4>
-          )}
-          {loginForm()}
-
-          <Button
+      <br/>
+       <Button
             onClick={googleLogin}
             type="danger"
             className="mb-3"
@@ -166,6 +153,32 @@ const Login = ({ history }) => {
 
           <Link to="/forgot/password" className="float-right text-danger">
             Forgot Password
+          </Link>
+    </form>
+  );
+
+  return (
+    <div className="container-fluid login-container">
+      <div className="row">
+        <div className="col-xl-6">
+          {loading ? (
+            <h4 className="text-danger">Loading...</h4>
+          ) : (
+            <h4 style={{color: "#dfbd00", fontWeight:"bold"}}>Login</h4>
+          )}
+          {loginForm()}
+        </div>
+        <div style={{marginTop:"20px"}} className="col-md-6">
+         <div style={{marginBottom:"10px"}}>
+           <h4 style={{color: "#dfbd00"}}>Why you need to have accont?</h4>
+           <span style={{fontWeight:"bold", fontSize:"18px"}}>Create an account with us and you'll be able to:</span><br/>
+           <span style={{margin:"0 0 0 20px", fontSize:"18px"}}>Check out faster</span><br/>
+           <span style={{margin:"0 0 0 20px", fontSize:"18px"}}>Access your order history</span><br/>
+           <span style={{margin:"0 0 0 20px", fontSize:"18px"}}>Track new orders</span><br/>
+           <span style={{margin:"0 0 0 20px", fontSize:"18px"}}>Save items to your Wish List</span>
+         </div>
+            <Link to="/register" className="float-left register-btn">
+            Register Now
           </Link>
         </div>
       </div>
