@@ -11,21 +11,20 @@ import _ from "lodash";
 import { useSelector, useDispatch } from "react-redux";
 import { addToWishlist } from "../../functions/user";
 import { toast } from "react-toastify";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
+import Slider from "react-slick";
 
 const { TabPane } = Tabs;
 
 // this is childrend component of Product page
 const SingleProduct = ({ product, onStarClick, star }) => {
-  
-
   // redux
   const { user, cart } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
   // router
   let history = useHistory();
 
-  const { title, images, description, _id } = product;
+  const { title, images, description, _id, category, subs } = product;
 
   const handleAddToCart = () => {
     // create cart array
@@ -65,58 +64,96 @@ const SingleProduct = ({ product, onStarClick, star }) => {
     addToWishlist(product._id, user.token).then((res) => {
       console.log("ADDED TO WISHLIST", res.data);
       toast.success("Added to wishlist");
-      
     });
   };
-
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    arrows: false,
+  };
   return (
-    <div>
-      <div className="col-md-5">
-        {images && images.length ? (
-          <Carousel showArrows={true} autoPlay infiniteLoop>
-            {images && images.map((i) => <img src={i.url} key={i.public_id}/>)}
-          </Carousel>
-        ) : (
-          <Card cover={<img src={Laptop} className="mb-3 card-image" />}></Card>
-        )} 
-      </div>
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-lg-6">
+          {images && images.length ? (
+            <div className="row">
+              <div className="col-lg-3"></div>
+              <div className="col-lg-6 center">
+                <Slider {...settings}>
+                  {images &&
+                    images.map((i) => <img src={i.url} key={i.public_id} />)}
+                </Slider>
+              </div>
+              <div className="col-lg-3"></div>
+            </div>
+          ) : (
+            <Card
+              cover={<img src={Laptop} className="mb-3 card-image" />}
+            ></Card>
+          )}
+        </div>
 
-      <div className="col-md-5">
-        <h1 className=" p-3">{title}</h1>
-        <Card
-          actions={[
+        <div className="col-md-6">
+          <h1 className=" p-3">{title}</h1>
+          <div className="d-flex">
+            Category: 
+            {category && (
+              <div className="ml-4">
+                <Link to={`/category/${category.slug}`} className="float-left">
+                  {category.name}
+                </Link>
+              </div>
+            )}
+            {subs && (
+              <div className="ml-1">
+                {subs.map((s) => (
+                  <Link key={s._id} to={`/sub/${s.slug}`}>
+                    / {" "}{s.name}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <Card
+            actions={[
               <a onClick={handleAddToCart} disabled={product.quantity < 1}>
                 <ShoppingCartOutlined className="text-danger" />
                 <br />
                 {product.quantity < 1 ? "Out of Stock" : "Add To Cart"}
               </a>,
-            <a onClick={handleAddToWishlist}>
-              <HeartOutlined className="text-info" /> <br /> Add to Wishlist
-            </a>,
-            <RatingModal>
-              <StarRating
-                name={_id}
-                numberOfStars={5}
-                rating={star}
-                changeRating={onStarClick}
-                isSelectable={true}
-                starRatedColor="red"
-              />
-            </RatingModal>,
-          ]}
-        >
-          <ProductListItems product={product} />
-        </Card>
-      </div>
-      <div>
-      <Tabs type="card">
-          <TabPane tab="Description" key="1">
-            {description && description}
-          </TabPane>
-          <TabPane tab="More" key="2">
-            Call use on xxxx xxx xxx to learn more about this product.
-          </TabPane>
-        </Tabs>
+              <a onClick={handleAddToWishlist}>
+                <HeartOutlined className="text-info" /> <br /> Add to Wishlist
+              </a>,
+              <RatingModal>
+                <StarRating
+                  name={_id}
+                  numberOfStars={5}
+                  rating={star}
+                  changeRating={onStarClick}
+                  isSelectable={true}
+                  starRatedColor="red"
+                />
+              </RatingModal>,
+            ]}
+          >
+            <ProductListItems product={product} />
+          </Card>
+        </div>
+        <div>
+          <Tabs type="card">
+            <TabPane tab="Description" key="1">
+              {description && description}
+            </TabPane>
+            <TabPane tab="More" key="2">
+              Call use on xxxx xxx xxx to learn more about this product.
+            </TabPane>
+          </Tabs>
+        </div>
       </div>
     </div>
   );

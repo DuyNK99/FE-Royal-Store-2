@@ -20,7 +20,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <h4 className="text-center p-3 mt-5 mb-5 display-4 jumbotron">
+      <h4 className="text-center p-3 mt-5 mb-5 display-4 jumbotron" style={{backgroundColor:"#001529"}}>
         New Arrivals
       </h4>
       <NewArrivals />

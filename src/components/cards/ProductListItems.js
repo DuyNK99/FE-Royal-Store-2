@@ -27,32 +27,7 @@ const ProductListItems = ({ product }) => {
         </span>
       </li>
 
-      {category && (
-        <li className="list-group-item">
-          Category{" "}
-          <Link
-            to={`/category/${category.slug}`}
-            className="label label-default label-pill pull-xs-right"
-          >
-            {category.name}
-          </Link>
-        </li>
-      )}
-
-      {subs && (
-        <li className="list-group-item">
-          Sub Categories
-          {subs.map((s) => (
-            <Link
-              key={s._id}
-              to={`/sub/${s.slug}`}
-              className="label label-default label-pill pull-xs-right"
-            >
-              {s.name}
-            </Link>
-          ))}
-        </li>
-      )}
+     
 
       <li className="list-group-item">
         Shipping{" "}
