@@ -70,8 +70,8 @@ const SingleProduct = ({ product, onStarClick, star }) => {
   };
 
   return (
-    <>
-      <div className="col-md-7">
+    <div>
+      <div className="col-md-5">
         {images && images.length ? (
           <Carousel showArrows={true} autoPlay infiniteLoop>
             {images && images.map((i) => <img src={i.url} key={i.public_id}/>)}
@@ -118,7 +118,7 @@ const SingleProduct = ({ product, onStarClick, star }) => {
           </TabPane>
         </Tabs>
       </div>
-    </>
+    </div>
   );
 };
 

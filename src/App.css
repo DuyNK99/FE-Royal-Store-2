@@ -20,7 +20,10 @@ margin-left: auto;
   position:sticky;
   top:0;
   z-index: 1;
-  background-color: rgba(255,255,255, 0.95);
+  background-color: #001529;
+}
+.nav-title h3{
+  color:white;
 }
  /*CSS  FOR  SLDE HOME IMAGE*/
 .slide{
@@ -63,12 +66,13 @@ margin-left: auto;
 
 /*----------------------------------------CSS FOR FOOTER----------------------------*/
 .footer-wrap{
+  background-color: #001529
   
 }
 .footer_container_wrap{
     
     margin-top:40px;
-    background-color: #333;
+    background-color: #001529;
     padding-left: 10%;
 }
 .footer_container{
@@ -112,6 +116,7 @@ color: #fff;
 .footer_copyright h6{
     float: right;
     padding: 15% 40px 0 0;   
+    color: #fff
 }
 .footer_logo{
     width:30%;
@@ -121,7 +126,7 @@ color: #fff;
 }
 /*--------------------------------------------------------*/
 
-/*CSS  FOR STRIPE */
+/*----------------------------------CSS  FOR STRIPE ----------------------------------------------------*/
 .stripe-form {
   /* width: 60vw; */
   align-self: center;
@@ -365,4 +370,4 @@ button:hover {
 @media screen and (max-width:1200px){
   .product-grid{ margin: 0 0 30px; }
 }
-/*----------------------------------------------*/
+/*--------------------------------------------*/

@@ -4,7 +4,7 @@ import ProductCard from "../cards/ProductCard";
 import LoadingCard from "../cards/LoadingCard";
 import { Pagination } from "antd";
 
-const NewArrivals = () => {
+const BestSellers = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [productsCount, setProductsCount] = useState(0);
@@ -21,7 +21,7 @@ const NewArrivals = () => {
   const loadAllProducts = () => {
     setLoading(true);
     // sort, order, limit
-    getProducts("createdAt", "desc", page).then((res) => {
+    getProducts("sold", "desc", page).then((res) => {
       setProducts(res.data);
       setLoading(false);
     });
@@ -56,4 +56,4 @@ const NewArrivals = () => {
   );
 };
 
-export default NewArrivals;
+export default BestSellers;

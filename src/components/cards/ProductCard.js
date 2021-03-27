@@ -89,7 +89,7 @@ const ProductCard = ({ product }) => {
           <Link to={`/product/${slug}`} class="image">
             <img
               src={images && images.length ? images[0].url : laptop}
-              style={{objectFit: "cover", height: "300px", width: "300px"}}
+              style={{objectFit: "cover", height: "300px", width: "300px", padding: "0", margin:"0 auto"}}
               className="p-1"
             />
           </Link>

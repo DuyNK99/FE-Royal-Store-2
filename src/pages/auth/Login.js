@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { auth, googleAuthProvider } from "../../firebase";
 import { toast } from "react-toastify";
-import { Button } from "antd";
+import { Button,  Spin } from "antd";
 import { MailOutlined, GoogleOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -162,7 +162,7 @@ const Login = ({ history }) => {
       <div className="row">
         <div className="col-xl-6">
           {loading ? (
-            <h4 className="text-danger">Loading...</h4>
+            <h4 className="text-danger"><Spin/></h4>
           ) : (
             <h4 style={{color: "#dfbd00", fontWeight:"bold"}}>Login</h4>
           )}

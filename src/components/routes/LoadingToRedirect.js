@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import Jumbotron from "../../components/cards/Jumbotron";
 
 const LoadingToRedirect = () => {
   const [count, setCount] = useState(5);
@@ -17,7 +18,8 @@ const LoadingToRedirect = () => {
 
   return (
     <div className="container p-5 text-center">
-      <p>Redirecting you in {count} seconds</p>
+       <img className="loading-img" src="/images/royalLogo.png" style={{width:"100px", height:"100px"}}></img><Jumbotron text={["Loading to Redirect..."]}/>
+       
     </div>
   );
 };

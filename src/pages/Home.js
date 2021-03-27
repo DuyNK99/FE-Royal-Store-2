@@ -2,8 +2,9 @@ import React from "react";
 import Jumbotron from "../components/cards/Jumbotron";
 import NewArrivals from "../components/home/NewArrivals";
 import BestSellers from "../components/home/BestSellers";
-import CategoryList from "../components/category/CategoryList";
-import SubList from "../components/sub/SubList";
+import Table from "../components/home/Table";
+import Beds from "../components/home/Bed";
+import Chair from "../components/home/Chair";
 
 const Home = () => {
   return (
@@ -28,18 +29,18 @@ const Home = () => {
         Best Sellers
       </h4>
       <BestSellers />
-
       <h4 className="text-center p-3 mt-5 mb-5 display-4 jumbotron">
-        Categories
+        Table
       </h4>
-      <CategoryList />
-
+      <Table />
       <h4 className="text-center p-3 mt-5 mb-5 display-4 jumbotron">
-        Sub Categories
+        Beds
       </h4>
-      <SubList />
-
-      <br />
+      <Beds />
+      <h4 className="text-center p-3 mt-5 mb-5 display-4 jumbotron">
+        Chair
+      </h4>
+      <Chair />
       <br />
       </div>
     </>

@@ -5,8 +5,9 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <>
+    <div className="footer-wrap">
     <footer className="footer">
-        <div className="container-fluid  footer-wrap">
+        <div className="container-fluid">
             <div className="footer_container_wrap">
         <div className="row">
             <div className="col-lg-4">
@@ -97,7 +98,7 @@ const Footer = () => {
         </div>
         </div>
         </div>
-    </footer>
+    </footer></div>
         </>
   );
 };

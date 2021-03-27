@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { auth } from "../../firebase";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import {  Spin } from "antd";
 
 const ForgotPassword = ({ history }) => {
   const [email, setEmail] = useState("");
@@ -39,7 +40,7 @@ const ForgotPassword = ({ history }) => {
   return (
     <div className="container col-md-6 offset-md-3 p-5">
       {loading ? (
-        <h4 className="text-danger">Loading</h4>
+        <h4 className="text-danger"><Spin/></h4>
       ) : (
         <h4>Forgot Password</h4>
       )}

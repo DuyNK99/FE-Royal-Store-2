@@ -14,6 +14,7 @@ import firebase from "firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Search from "../forms/Search";
+import "../../App.css";
 
 const { SubMenu, Item } = Menu;
 
@@ -53,7 +54,7 @@ const Header = () => {
               <div className="row">
                 <div className="col-lg-6">
                   <div>
-                    <ul >
+                    <ul className="nav-title">
                       <h3>Your Are Best</h3>
                     </ul>
                   </div>
@@ -63,6 +64,7 @@ const Header = () => {
                     onClick={handleClick}
                     selectedKeys={[current]}
                     mode="horizontal"
+                    theme="dark"
                   >
                     {!user && (
                       <Item
@@ -107,17 +109,28 @@ const Header = () => {
                         </Item>
                       </SubMenu>
                     )}
-                    <Item
+                   {cart && cart.length > 0 &&( <Item
                       key="cart"
-                      icon={<ShoppingCartOutlined />}
+                      icon={<ShoppingCartOutlined style={{color: "white"}}/>}
                       className="float-right"
                     >
                       <Link to="/cart">
-                        <Badge count={cart.length} offset={[9, 0]}>
-                          Cart
+                        <Badge count={cart.length} offset={[9, 0]} >
+                          <span style={{color: "white"}}>Cart</span>
                         </Badge>
                       </Link>
-                    </Item>
+                    </Item>)}
+                          {cart && cart.length == 0 &&( <Item
+                      key="cart"
+                      icon={<ShoppingCartOutlined style={{color: "rgba(255, 255, 255, 0.65)"}}/>}
+                      className="float-right"
+                    >
+                      <Link to="/cart">
+                        <Badge count={cart.length} offset={[9, 0]} >
+                          <span style={{color: "rgba(255, 255, 255, 0.65)"}}>Cart</span>
+                        </Badge>
+                      </Link>
+                    </Item>)}
                   </Menu>
                 </div>
               </div>
@@ -127,6 +140,7 @@ const Header = () => {
                     onClick={handleClick}
                     selectedKeys={[current]}
                     mode="horizontal"
+                    theme="dark"
                   >
                     <Item key="home" icon={<AppstoreOutlined />}>
                       <Link to="/">Home</Link>
@@ -142,6 +156,7 @@ const Header = () => {
                     onClick={handleClick}
                     selectedKeys={[current]}
                     mode="horizontal"
+                    theme="dark"
                   >
                     <span className="float-right p-1">
                       <Search />

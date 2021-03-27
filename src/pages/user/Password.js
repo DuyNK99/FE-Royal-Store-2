@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import UserNav from "../../components/nav/UserNav";
 import { auth } from "../../firebase";
 import { toast } from "react-toastify";
+import {Spin } from "antd";
 
 const Password = () => {
   const [password, setPassword] = useState("");
@@ -55,7 +56,7 @@ const Password = () => {
         </div>
         <div className="col">
           {loading ? (
-            <h4 className="text-danger">Loading..</h4>
+            <h4 className="text-danger"><Spin/></h4>
           ) : (
             <h4>Password Update</h4>
           )}
