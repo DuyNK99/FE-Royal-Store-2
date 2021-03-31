@@ -24,7 +24,6 @@ const Shop = () => {
   const [ok, setOk] = useState(false);
   const [categories, setCategories] = useState([]);
   const [categoryIds, setCategoryIds] = useState([]);
-  const [star, setStar] = useState("");
   const [subs, setSubs] = useState([]);
   const [sub, setSub] = useState("");
   const [materials, setMaterials] = useState(["Wood", "Metal", "Glasses", "Leather ", "Plastic"]);
@@ -83,7 +82,6 @@ const Shop = () => {
     // reset
     setCategoryIds([]);
     setPrice(value);
-    setStar("");
     setSub("");
     setMaterial("");
     setShipping("");
@@ -118,7 +116,6 @@ const Shop = () => {
       payload: { text: "" },
     });
     setPrice([0, 0]);
-    setStar("");
     setSub("");
     setMaterial("");
     setShipping("");
@@ -141,30 +138,6 @@ const Shop = () => {
   };
 
   // 5. show products by star rating
-  const handleStarClick = (num) => {
-    // console.log(num);
-    dispatch({
-      type: "SEARCH_QUERY",
-      payload: { text: "" },
-    });
-    setPrice([0, 0]);
-    setCategoryIds([]);
-    setStar(num);
-    setSub("");
-    setMaterial("");
-    setShipping("");
-    fetchProducts({ stars: num });
-  };
-
-  const showStars = () => (
-    <div className="pr-4 pl-4 pb-2">
-      <Star starClick={handleStarClick} numberOfStars={5} />
-      <Star starClick={handleStarClick} numberOfStars={4} />
-      <Star starClick={handleStarClick} numberOfStars={3} />
-      <Star starClick={handleStarClick} numberOfStars={2} />
-      <Star starClick={handleStarClick} numberOfStars={1} />
-    </div>
-  );
 
   // 6. show products by sub category
   const showSubs = () =>
@@ -188,7 +161,6 @@ const Shop = () => {
     });
     setPrice([0, 0]);
     setCategoryIds([]);
-    setStar("");
     setMaterial("");
     setShipping("");
     fetchProducts({ sub });
@@ -217,7 +189,6 @@ const Shop = () => {
     });
     setPrice([0, 0]);
     setCategoryIds([]);
-    setStar("");
     setMaterial(e.target.value);
     setShipping("");
     fetchProducts({ material: e.target.value });
@@ -254,7 +225,6 @@ const Shop = () => {
     });
     setPrice([0, 0]);
     setCategoryIds([]);
-    setStar("");
     setMaterial("");
     setShipping(e.target.value);
     fetchProducts({ shipping: e.target.value });
@@ -302,18 +272,6 @@ const Shop = () => {
               }
             >
               <div style={{ maringTop: "-10px" }}>{showCategories()}</div>
-            </SubMenu>
-
-            {/* stars */}
-            <SubMenu
-              key="3"
-              title={
-                <span className="h6">
-                  <StarOutlined /> Rating
-                </span>
-              }
-            >
-              <div style={{ maringTop: "-10px" }}>{showStars()}</div>
             </SubMenu>
 
             {/* sub category */}

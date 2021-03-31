@@ -41,7 +41,7 @@ margin-left: auto;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgba(94, 93, 93, 1);
+  background-color: rgb(228, 228, 228);
   font-size:40px;
   color: #dfbd00;
 }

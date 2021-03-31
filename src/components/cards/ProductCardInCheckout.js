@@ -6,36 +6,36 @@ import { toast } from "react-toastify";
 import {
   CheckCircleOutlined,
   CloseCircleOutlined,
-  CloseOutlined,
+  DeleteOutlined,
 } from "@ant-design/icons";
 
 const ProductCardInCheckout = ({ p }) => {
   const materials = ["Wood", "Metal", "Glasses", "Leather ", "Plastic"];
   let dispatch = useDispatch();
 
-  const handleMaterialChange = (e) => {
-    console.log("color changed", e.target.value);
+  // const handleMaterialChange = (e) => {
+  //   console.log("color changed", e.target.value);
 
-    let cart = [];
-    if (typeof window !== "undefined") {
-      if (localStorage.getItem("cart")) {
-        cart = JSON.parse(localStorage.getItem("cart"));
-      }
+  //   let cart = [];
+  //   if (typeof window !== "undefined") {
+  //     if (localStorage.getItem("cart")) {
+  //       cart = JSON.parse(localStorage.getItem("cart"));
+  //     }
 
-      cart.map((product, i) => {
-        if (product._id === p._id) {
-          cart[i].material = e.target.value;
-        }
-      });
+  //     cart.map((product, i) => {
+  //       if (product._id === p._id) {
+  //         cart[i].material = e.target.value;
+  //       }
+  //     });
 
-      //  console.log('cart udpate color', cart)
-      localStorage.setItem("cart", JSON.stringify(cart));
-      dispatch({
-        type: "ADD_TO_CART",
-        payload: cart,
-      });
-    }
-  };
+  //     //  console.log('cart udpate color', cart)
+  //     localStorage.setItem("cart", JSON.stringify(cart));
+  //     dispatch({
+  //       type: "ADD_TO_CART",
+  //       payload: cart,
+  //     });
+  //   }
+  // };
 
   const handleQuantityChange = (e) => {
     // console.log("available quantity", p.quantity);
@@ -91,62 +91,79 @@ const ProductCardInCheckout = ({ p }) => {
   };
 
   return (
-    <tbody>
-      <tr>
-        <td>
-          <div style={{ width: "100px", height: "auto" }}>
+    <div className="row" style={{}}>
+      <div className="col" style={{ height: "220px",backgroundColor:"rgba(226, 226, 226, 0.5)", margin:"10px 10px  0 10px", paddingTop:"10px" }}>
+        <div className="row">
+          <div style={{ width: "100px", height: "auto" }} className="col-md-3">
             {p.images.length ? (
-              <ModalImage small={p.images[0].url} large={p.images[0].url} />
+              <div style={{ width: "100px", height: "100px" }}>
+                <img
+                  src={p.images[0].url}
+                  large={p.images[0].url}
+                  style={{
+                    objectFit: "cover",
+                    height: "200px",
+                    width: "200px",
+                    padding: "0",
+                    margin: "0 auto",
+                  }}
+                />
+              </div>
             ) : (
-              <ModalImage small={laptop} large={laptop} />
+              <img
+              src={laptop}
+              style={{
+                objectFit: "cover",
+                height: "200px",
+                width: "200px",
+                padding: "0",
+                margin: "0 auto",
+              }}
+            />
             )}
           </div>
-        </td>
-        <td>{p.title}</td>
-        <td>${p.price}</td>
-        <td>
-          <select
-            onChange={handleMaterialChange}
-            name="material"
-            className="form-control"
-          >
-            {p.material ? (
-              <option value={p.material}>{p.material}</option>
-            ) : (
-              <option>Select</option>
-            )}
-            {materials
-              .filter((c) => c !== p.material)
-              .map((c) => (
-                <option key={c} value={c}>
-                  {c}
-                </option>
-              ))}
-          </select>
-        </td>
-        <td className="text-center">
-          <input
-            type="number"
-            className="form-control"
-            value={p.count}
-            onChange={handleQuantityChange}
-          />
-        </td>
-        <td className="text-center">
-          {p.shipping === "Yes" ? (
-            <CheckCircleOutlined className="text-success" />
-          ) : (
-            <CloseCircleOutlined className="text-danger" />
-          )}
-        </td>
-        <td className="text-center">
-          <CloseOutlined
-            onClick={handleRemove}
-            className="text-danger pointer"
-          />
-        </td>
-      </tr>
-    </tbody>
+          <div className="col-md-8">
+            <div className="row">
+              <div className="col-md-6"><span style={{fontWeight:"bold", fontSize:"20px"}}>{p.title}</span></div>
+            </div>
+            <div className="row">
+              <div className="col-md-6" style={{marginTop:"20px"}}>
+                <span style={{fontWeight:"bold", fontSize:"14px"}} >Material:</span> {p.material}
+                <br />
+                {p.shipping === "Yes" ? (
+                  <span style={{fontWeight:"bold", fontSize:"14px", color:"#00e600"}}>Available Shipping</span>
+                ) : (
+                  <span style={{fontWeight:"bold", fontSize:"14px", color:"#e62e00"}}>Unavailable Shipping</span>
+                )}
+              </div>
+              <div className="col-md-3"  style={{marginTop:"20px"}}><span style={{fontWeight:"bold", fontSize:"14px"}}>Price: </span>${p.price}</div>
+              <div className="col-md-3" style={{ display: "flex",marginTop:"20px" }}>
+                <span style={{fontWeight:"bold", fontSize:"14px"}}>Quantity:</span>
+                <input
+                  type="number"
+                  className="form-control"
+                  value={p.count}
+                  onChange={handleQuantityChange}
+                  style={{
+                    width: "50px",
+                    height: "20px",
+                    marginLeft: "5px",
+                    textAlign: "center",
+                  }}
+                />
+              </div>
+            </div>
+            <div className="row ">
+              <div className="col-md-3 "style={{marginTop:"20px"}}>
+                <button onClick={handleRemove} className="btn btn-sm mt-2" style={{backgroundColor: "#ff471a", color:"white"}}>
+                  Remove Product
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
