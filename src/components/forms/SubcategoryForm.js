@@ -1,9 +1,9 @@
 import React from "react";
 import "../../App.css"
-const CategoryForm = ({ handleSubmit, name, setName }) => (
+const SubcategoryForm = ({ handleSubmit, name, setName }) => (
   <form onSubmit={handleSubmit}>
-    <div className="form-group cate-create-form">
-      <label>Name</label>
+    <div className="form-group cate-inputform">
+      <label style={{fontWeight:"bold"}}>Name</label>
       <input
         type="text"
         className="form-control"
@@ -18,4 +18,4 @@ const CategoryForm = ({ handleSubmit, name, setName }) => (
   </form>
 );
 
-export default CategoryForm;
+export default SubcategoryForm;

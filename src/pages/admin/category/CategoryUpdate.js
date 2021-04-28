@@ -40,10 +40,12 @@ const CategoryUpdate = ({ history, match }) => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-md-2">
+        <div className="col">
           <AdminNav />
         </div>
-        <div className="col">
+        </div>
+        <div className="row">
+        <div className="col-md-10">
           {loading ? (
             <h4 className="text-danger">Loading..</h4>
           ) : (

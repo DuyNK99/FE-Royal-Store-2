@@ -1,6 +1,6 @@
 import React from "react";
 import { Select } from "antd";
-
+import "../../App.css"
 const { Option } = Select;
 
 const ProductCreateForm = ({
@@ -29,7 +29,7 @@ const ProductCreateForm = ({
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="form-group">
+      <div className="form-group create-form">
         <label>Title</label>
         <input
           type="text"
@@ -40,7 +40,7 @@ const ProductCreateForm = ({
         />
       </div>
 
-      <div className="form-group">
+      <div className="form-group create-form">
         <label>Description</label>
         <input
           type="text"
@@ -51,18 +51,18 @@ const ProductCreateForm = ({
         />
       </div>
 
-      <div className="form-group">
+      <div className="form-group create-form">
         <label>Price</label>
         <input
           type="number"
           name="price"
-          className="form-control"
+          className="form-control create-form"
           value={price}
           onChange={handleChange}
         />
       </div>
 
-      <div className="form-group">
+      <div className="form-group create-form">
         <label>Shipping</label>
         <select
           name="shipping"
@@ -75,7 +75,7 @@ const ProductCreateForm = ({
         </select>
       </div>
 
-      <div className="form-group">
+      <div className="form-group create-form">
         <label>Quantity</label>
         <input
           type="number"
@@ -86,7 +86,7 @@ const ProductCreateForm = ({
         />
       </div>
 
-      <div className="form-group">
+      <div className="form-group create-form">
         <label>Material</label>
         <select name="material" className="form-control" onChange={handleChange}>
           <option>Please select</option>
@@ -100,7 +100,7 @@ const ProductCreateForm = ({
 
 
 
-      <div className="form-group">
+      <div className="form-group create-form" >
         <label>Category</label>
         <select
           name="category"
@@ -136,9 +136,9 @@ const ProductCreateForm = ({
           </Select>
         </div>
       )}
-
+<div className="create-form">
       <br />
-      <button className="btn btn-outline-info">Save</button>
+      <button className="btn btn-outline-info">Save</button></div>
     </form>
   );
 };

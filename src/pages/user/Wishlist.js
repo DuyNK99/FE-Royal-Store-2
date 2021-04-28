@@ -26,11 +26,11 @@ const Wishlist = () => {
 
   return (
     <div className="container-fluid">
+      <div><UserNav/></div>
       <div className="row">
         <div className="col-md-2">
-          <UserNav />
         </div>
-        <div className="col">
+        <div className="col-md-8" style={{marginTop:"80px"}}>
           <h4>Wishlist</h4>
 
           {wishlist.map((p) => (
@@ -44,6 +44,8 @@ const Wishlist = () => {
               </span>
             </div>
           ))}
+        </div>
+        <div className="col-md-2">
         </div>
       </div>
     </div>

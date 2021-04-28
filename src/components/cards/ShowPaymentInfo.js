@@ -1,8 +1,36 @@
 import React from "react";
+import {Link} from "react-router-dom";
+import {EyeOutlined} from "@ant-design/icons";
 
-const ShowPaymentInfo = ({ order }) => (
+const ShowPaymentInfo = ({ order, showStatus = true }) => (
   <div>
-    <p>
+     <table className="table table-bordered">
+            <thead className="thead-light">
+              <tr>
+                <th scope="col">ID of Orders</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Status</th>
+                <th scope="col">Date</th>
+              </tr>
+            </thead>
+
+            <tbody>
+             
+                <tr>
+                  <td>{order._id}</td>
+                  <td> {(order.paymentIntent.amount /= 100).toLocaleString("en-US", {
+          style: "currency",
+          currency: "USD",
+        })}</td>
+                  <td>Payment {order.paymentIntent.status.toUpperCase()}</td>
+                  <td>
+                  {(order.createdAt).toLocaleString()}
+                  </td>
+                </tr>
+              
+            </tbody>
+          </table>
+    {/* <p>
       <span>Order Id: {order.paymentIntent.id}</span>
       {" / "}
       <span>
@@ -24,10 +52,13 @@ const ShowPaymentInfo = ({ order }) => (
         {new Date(order.paymentIntent.created * 1000).toLocaleString()}
       </span>
       {" / "}
-      <span className="badge bg-primary text-white">
-        STATUS: {order.orderStatus}
-      </span>
-    </p>
+      <br />
+      {showStatus && (
+        <span className="badge bg-primary text-white">
+          STATUS: {order.orderStatus}
+        </span>
+      )}
+    </p> */}
   </div>
 );
 

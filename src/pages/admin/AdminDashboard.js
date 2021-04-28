@@ -4,6 +4,8 @@ import { getOrders, changeStatus } from "../../functions/admin";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import Orders from "../../components/order/Orders";
+import { Menu} from "antd";
+const {SubMenu} = Menu;
 
 const AdminDashboard = () => {
   const [orders, setOrders] = useState([]);
@@ -29,16 +31,17 @@ const AdminDashboard = () => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-md-2">
+        <div className="col">
           <AdminNav />
         </div>
-
-        <div className="col-md-10">
-          <h4>Admin Dashboard</h4>
+</div>
+<div  className="row">
+        <div className="col-md-10 " justify="center" style={{margin:"0 auto",marginTop:"80px"}}>
+          <h4>Order Dashboard</h4>
           {/* {JSON.stringify(orders)} */}
           <Orders orders={orders} handleStatusChange={handleStatusChange} />
         </div>
-      </div>
+      </div> 
     </div>
   );
 };

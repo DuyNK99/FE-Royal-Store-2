@@ -28,8 +28,7 @@ const Password = () => {
 
   const passwordUpdateForm = () => (
     <form onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label>Your Password</label>
+      <div className="form-group" style={{width:"400px"}}>
         <input
           type="password"
           onChange={(e) => setPassword(e.target.value)}
@@ -49,12 +48,12 @@ const Password = () => {
   );
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid"><UserNav />
       <div className="row">
         <div className="col-md-2">
-          <UserNav />
+          
         </div>
-        <div className="col">
+        <div className="col-md-8" style={{marginTop:"80px"}}>
           {loading ? (
             <h4 className="text-danger"><Spin/></h4>
           ) : (
@@ -62,6 +61,9 @@ const Password = () => {
           )}
           {passwordUpdateForm()}
         </div>
+        <div className="col-md-2">
+          
+          </div>
       </div>
     </div>
   );

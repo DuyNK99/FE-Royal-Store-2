@@ -3,6 +3,7 @@ import Resizer from "react-image-file-resizer";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { Avatar, Badge } from "antd";
+import "../../App.css";
 
 const FileUpload = ({ values, setValues, setLoading }) => {
   const { user } = useSelector((state) => ({ ...state }));
@@ -83,8 +84,8 @@ const FileUpload = ({ values, setValues, setLoading }) => {
   };
 
   return (
-    <>
-      <div className="row">
+    <div className="create-form">
+      <div className="row image-upload" >
         {values.images &&
           values.images.map((image) => (
             <Badge
@@ -104,7 +105,7 @@ const FileUpload = ({ values, setValues, setLoading }) => {
       </div>
       <div className="row">
         <label className="btn btn-primary">
-          Choose File
+          Choose Image
           <input
             type="file"
             multiple
@@ -114,7 +115,7 @@ const FileUpload = ({ values, setValues, setLoading }) => {
           />
         </label>
       </div>
-    </>
+    </div>
   );
 };
 

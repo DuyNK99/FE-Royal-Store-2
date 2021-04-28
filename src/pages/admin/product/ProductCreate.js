@@ -7,6 +7,7 @@ import ProductCreateForm from "../../../components/forms/ProductCreateForm";
 import { getCategories, getCategorySubs } from "../../../functions/category";
 import FileUpload from "../../../components/forms/FileUpload";
 import { LoadingOutlined } from "@ant-design/icons";
+import "../../../App.css";
 
 const initialState = {
   title: "",
@@ -72,11 +73,13 @@ const ProductCreate = () => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-md-2">
+        <div className="col">
           <AdminNav />
         </div>
-
-        <div className="col-md-10">
+</div>
+<div className="row">
+  <div className="col-md-2"></div>
+        <div className="col-md-4 create-wrap">
           {loading ? (
             <LoadingOutlined className="text-danger h1" />
           ) : (
@@ -86,13 +89,7 @@ const ProductCreate = () => {
 
           {/* {JSON.stringify(values.images)} */}
 
-          <div className="p-3">
-            <FileUpload
-              values={values}
-              setValues={setValues}
-              setLoading={setLoading}
-            />
-          </div>
+         
 
           <ProductCreateForm
             handleSubmit={handleSubmit}
@@ -104,6 +101,14 @@ const ProductCreate = () => {
             showSub={showSub}
           />
         </div>
+        <div className="col-md-4"> <div className="p-3">
+            <FileUpload
+              values={values}
+              setValues={setValues}
+              setLoading={setLoading}
+            />
+          </div></div>
+          <div className="col-md-2"></div>
       </div>
     </div>
   );

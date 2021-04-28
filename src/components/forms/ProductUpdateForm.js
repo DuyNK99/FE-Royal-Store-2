@@ -25,9 +25,8 @@ const ProductUpdateForm = ({
     shipping,
     quantity,
     images,
-    colors,
-    brands,
-    color,
+    materials,
+    material,
     brand,
   } = values;
 
@@ -91,32 +90,16 @@ const ProductUpdateForm = ({
       </div>
 
       <div className="form-group">
-        <label>Color</label>
+        <label>Material</label>
         <select
-          value={color}
-          name="color"
+          value={material}
+          name="material"
           className="form-control"
           onChange={handleChange}
         >
-          {colors.map((c) => (
+          {materials.map((c) => (
             <option key={c} value={c}>
               {c}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className="form-group">
-        <label>Brand</label>
-        <select
-          value={brand}
-          name="brand"
-          className="form-control"
-          onChange={handleChange}
-        >
-          {brands.map((b) => (
-            <option key={b} value={b}>
-              {b}
             </option>
           ))}
         </select>

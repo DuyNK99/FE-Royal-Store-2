@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import ProductCardInCheckout from "../components/cards/ProductCardInCheckout";
 import { userCart } from "../functions/user";
-
+import { toast } from "react-toastify";
+import {
+  getUserCart,
+  emptyUserCart,
+  saveUserAddress,
+  applyCoupon,
+  createCashOrderForUser,
+} from "../functions/user";
+import "../App.css"
 const Cart = ({ history }) => {
   const { cart, user } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
-
+  const [products, setProducts] = useState([]);
   const summaryOrder = document.getElementById("summaryOrder");
 
   const listenScrollEvent = (e) => {
@@ -27,6 +35,22 @@ const Cart = ({ history }) => {
   };
 
   window.addEventListener("scroll", listenScrollEvent);
+  const emptyCart = () => {
+    // remove from local storage
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("cart");
+    }
+    // remove from redux
+    dispatch({
+      type: "ADD_TO_CART",
+      payload: [],
+    });
+    // remove from backend
+    emptyUserCart(user.token).then((res) => {
+      setProducts([]);
+      toast.success("Cart is emapty. Contniue shopping.");
+    });
+  };
 
   const getTotal = () => {
     return cart.reduce((currentValue, nextValue) => {
@@ -72,9 +96,11 @@ const Cart = ({ history }) => {
         <h4>You have "{cart.length} Product" in your Cart</h4>
 
         {!cart.length ? (
-          <p>
-            No products in cart. <Link to="/shop">Continue Shopping.</Link>
-          </p>
+          
+          <div className="continue-shopping">
+             <img src="/images/continute-shopping.png" className="section_img" style={{width:"350px", height:"350px"}}></img>
+            <span style={{fontWeight:"bold", fontSize:"1.5rem", display:"block"}}><Link to="/shop">Continue Shopping.</Link></span>
+          </div>
         ) : (
           <div style={{position:"relative"}} className="row">
             <div className="col-md-8">{showCartItems()}</div>
@@ -90,7 +116,16 @@ const Cart = ({ history }) => {
               ))}
 
               Total: <span style={{color:"red", fontWeight:"bold", fontSize:"20px"}}>${getTotal()}</span>
-
+              <div className="col-md-6">
+            <button
+              disabled={!cart.length}
+              onClick={emptyCart}
+              className="btn btn-primary"
+            >
+              Empty Cart
+            </button>
+          </div>
+       
               {user ? (
                 <div className="d-flex justify-content-center">
                   <button
@@ -111,7 +146,8 @@ const Cart = ({ history }) => {
                     Pay Cash on Delivery
                   </button>
                 </div>
-              ) : (
+              ) 
+              : (
                 <button className="btn btn-sm btn-primary mt-2">
                   <Link
                     to={{

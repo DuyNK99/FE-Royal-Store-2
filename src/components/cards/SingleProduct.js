@@ -1,7 +1,7 @@
 import React, { useState } from "react";
+import "../../App.css";
 import { Card, Tabs, Tooltip } from "antd";
 import { HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons";
-import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Laptop from "../../images/bugatti-divo-red-performance-ac.jpg";
 import ProductListItems from "./ProductListItems";
@@ -24,7 +24,7 @@ const SingleProduct = ({ product, onStarClick, star }) => {
   // router
   let history = useHistory();
 
-  const { title, images, description, _id, category, subs } = product;
+  const { title, images, description, _id, category, subs, quantity, material } = product;
 
   const handleAddToCart = () => {
     // create cart array
@@ -144,17 +144,14 @@ const SingleProduct = ({ product, onStarClick, star }) => {
             <ProductListItems product={product} />
           </Card>
         </div>
-        <div>
-          <Tabs type="card">
-            <TabPane tab="Description" key="1">
+       
+      </div> 
+      <div className="product-info-detail">
+        <h4 style={{marginLeft:"150px", marginTop:"20px"}}> Description</h4>
+              <div className="product-content" style={{marginLeft:"180px"}}>
               {description && description}
-            </TabPane>
-            <TabPane tab="More" key="2">
-              Call use on xxxx xxx xxx to learn more about this product.
-            </TabPane>
-          </Tabs>
+</div>
         </div>
-      </div>
     </div>
   );
 };

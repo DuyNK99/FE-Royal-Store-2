@@ -17,10 +17,8 @@ const initialState = {
   shipping: "",
   quantity: "",
   images: [],
-  colors: ["Black", "Brown", "Silver", "White", "Blue"],
-  brands: ["Apple", "Samsung", "Microsoft", "Lenovo", "ASUS"],
-  color: "",
-  brand: "",
+  materials: ["Wood", "Metal", "Glasses", "Leather ", "Plastic"],
+  material: "",
 };
 
 const ProductUpdate = ({ match, history }) => {
@@ -47,11 +45,11 @@ const ProductUpdate = ({ match, history }) => {
       // 1 load single proudct
       setValues({ ...values, ...p.data });
       // 2 load single product category subs
-      if(p && p.data && p.data.category) {
+      if (p && p.data && p.data.category) {
         getCategorySubs(p.data.category._id).then((res) => {
-            setSubOptions(res.data); // on first load, show default subs
+          setSubOptions(res.data); // on first load, show default subs
         });
-    }
+      }
       // 3 prepare array of sub ids to show as default sub values in antd Select
       let arr = [];
       p.data.subs.map((s) => {
@@ -119,18 +117,17 @@ const ProductUpdate = ({ match, history }) => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-md-2">
+        <div className="col">
           <AdminNav />
         </div>
-
+      </div>
+      <div className="row">
         <div className="col-md-10">
           {loading ? (
             <LoadingOutlined className="text-danger h1" />
           ) : (
             <h4>Product update</h4>
           )}
-
-          {/* {JSON.stringify(values)} */}
 
           <div className="p-3">
             <FileUpload

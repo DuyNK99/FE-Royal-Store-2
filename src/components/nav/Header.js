@@ -39,7 +39,7 @@ const Header = () => {
     });
     history.push("/login");
   };
-
+ 
   return (
     <>
       <nav className="nav_wrap">
@@ -55,7 +55,7 @@ const Header = () => {
                 <div className="col-lg-6">
                   <div>
                     <ul className="nav-title">
-                      <h3>Your Are Best</h3>
+                      <h3>We have everything you need for your home</h3>
                     </ul>
                   </div>
                 </div>
@@ -64,7 +64,7 @@ const Header = () => {
                     onClick={handleClick}
                     selectedKeys={[current]}
                     mode="horizontal"
-                    theme="dark"
+                    style={{backgroundColor:"rgb(9,58, 84,0)", border:"none"}}
                   >
                     {!user && (
                       <Item
@@ -72,7 +72,7 @@ const Header = () => {
                         icon={<UserAddOutlined />}
                         className="float-right"
                       >
-                        <Link to="/register">Register</Link>
+                        <Link to="/register" style={{fontSize:"18px", color:"white"}}>Register</Link>
                       </Item>
                     )}
 
@@ -82,7 +82,7 @@ const Header = () => {
                         icon={<UserOutlined />}
                         className="float-right"
                       >
-                        <Link to="/login">Login</Link>
+                        <Link to="/login" style={{fontSize:"18px", color:"white"}}>Login</Link>
                       </Item>
                     )}
 
@@ -91,32 +91,34 @@ const Header = () => {
                         icon={<SettingOutlined />}
                         title={user.email && user.email.split("@")[0]}
                         className="float-right"
+                        style={{fontSize:"18px", color:"white"}}
                       >
                         {user && user.role === "subscriber" && (
-                          <Item>
-                            <Link to="/user/history">Dashboard</Link>
+                          <Item >
+                            <Link to="/user/history" style={{fontSize:"18px", color:"black"}}>Dashboard</Link>
                           </Item>
                         )}
 
                         {user && user.role === "admin" && (
                           <Item>
-                            <Link to="/admin/dashboard">Dashboard</Link>
+                            <Link to="/admin/dashboard" style={{fontSize:"18px", color:"black"}}>Dashboard</Link>
                           </Item>
                         )}
 
-                        <Item icon={<LogoutOutlined />} onClick={logout}>
+                        <Item icon={<LogoutOutlined />} onClick={logout} style={{fontSize:"18px", color:"black"}}>
                           Logout
                         </Item>
                       </SubMenu>
                     )}
                    {cart && cart.length > 0 &&( <Item
                       key="cart"
-                      icon={<ShoppingCartOutlined style={{color: "white"}}/>}
+                      icon={<ShoppingCartOutlined />}
                       className="float-right"
+                      style={{color:"white"}}
                     >
                       <Link to="/cart">
                         <Badge count={cart.length} offset={[9, 0]} >
-                          <span style={{color: "white"}}>Cart</span>
+                          <span style={{fontSize:"18px", color:"white"}}>Cart</span>
                         </Badge>
                       </Link>
                     </Item>)}
@@ -127,7 +129,7 @@ const Header = () => {
                     >
                       <Link to="/cart">
                         <Badge count={cart.length} offset={[9, 0]} >
-                          <span style={{color: "rgba(255, 255, 255, 0.65)"}}>Cart</span>
+                          <span style={{fontSize:"18px",color: "rgba(255, 255, 255, 0.65)"}}>Cart</span>
                         </Badge>
                       </Link>
                     </Item>)}
@@ -140,14 +142,14 @@ const Header = () => {
                     onClick={handleClick}
                     selectedKeys={[current]}
                     mode="horizontal"
-                    theme="dark"
+                    style={{backgroundColor:"rgb(9,58, 84, 0)", border:"none"}}
                   >
                     <Item key="home" icon={<AppstoreOutlined />}>
-                      <Link to="/">Home</Link>
+                      <Link to="/" style={{fontSize:"18px", color:"white"}}>Home</Link>
                     </Item>
 
                     <Item key="shop" icon={<ShoppingOutlined />}>
-                      <Link to="/shop">Shop</Link>
+                      <Link to="/shop" style={{fontSize:"18px", color:"white"}}>Shop</Link>
                     </Item>
                   </Menu>
                 </div>
@@ -156,9 +158,9 @@ const Header = () => {
                     onClick={handleClick}
                     selectedKeys={[current]}
                     mode="horizontal"
-                    theme="dark"
+                    style={{backgroundColor:"rgb(9,58, 84, 0)",  border:"none"}}
                   >
-                    <span className="float-right p-1">
+                    <span className="float-right p-1"  style={{fontSize:"18px", color:"white"}}>
                       <Search />
                     </span>
                   </Menu>

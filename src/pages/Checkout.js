@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import "../App.css";
 import {
   getUserCart,
   emptyUserCart,
@@ -10,6 +11,11 @@ import {
 } from "../functions/user";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+  import {
+    getCoupons,
+
+  } from "../functions/coupon";
+
 
 const Checkout = ({ history }) => {
   const [products, setProducts] = useState([]);
@@ -20,10 +26,11 @@ const Checkout = ({ history }) => {
   // discount price
   const [totalAfterDiscount, setTotalAfterDiscount] = useState(0);
   const [discountError, setDiscountError] = useState("");
-
+  const [coupons, setCoupons] = useState([]);
   const dispatch = useDispatch();
   const { user, COD } = useSelector((state) => ({ ...state }));
   const couponTrueOrFalse = useSelector((state) => state.coupon);
+
 
   useEffect(() => {
     getUserCart(user.token).then((res) => {
@@ -32,7 +39,11 @@ const Checkout = ({ history }) => {
       setTotal(res.data.cartTotal);
     });
   }, []);
+  useEffect(() => {
+    loadAllCoupons();
+  }, []);
 
+  const loadAllCoupons = () => getCoupons().then((res) => setCoupons(res.data));
   const emptyCart = () => {
     // remove from local storage
     if (typeof window !== "undefined") {
@@ -49,7 +60,7 @@ const Checkout = ({ history }) => {
       setTotal(0);
       setTotalAfterDiscount(0);
       setCoupon("");
-      toast.success("Cart is emapty. Contniue shopping.");
+      toast.success("Cart is empty. Contniue shopping.");
     });
   };
 
@@ -100,7 +111,7 @@ const Checkout = ({ history }) => {
     products.map((p, i) => (
       <div key={i}>
         <p>
-          {p.product.title} x {p.count} ={" "}
+          <span style={{fontWeight:"bold"}}>{p.product.title}</span> x {p.count} ={" "}
           {p.product.price * p.count}
         </p>
       </div>
@@ -158,26 +169,38 @@ const Checkout = ({ history }) => {
   return (
     <div className="row">
       <div className="col-md-6">
-        <h4>Delivery Address</h4>
+        <div className="row left-form-checkout">
+          <div className="col-md-6">
+        <h4>Apply The Coupon </h4>
         <br />
-        <br />
-        {showAddress()}
-        <hr />
-        <h4>Got Coupon?</h4>
-        <br />
-        {showApplyCoupon()}
-        <br />
-        {discountError && <p className="bg-danger p-2">{discountError}</p>}
-      </div>
+        {showApplyCoupon()}</div>
+        
+        <div className="col-md-6 coupon-form">
+        {coupons.map((c) => (
 
-      <div className="col-md-6">
+                <div key={c._id} className="">
+                  <div className="coupon-content">
+                <span>  
+                 From {new Date(c.expiry).toLocaleDateString()} {" "}
+                 apply the coupon  " <span style={{fontWeight:"bold",color:"red"}}>{c.name}</span> " to <span style={{fontWeight:"bold",color:"red"}}>discount {c.discount}% </span> to total price of order.<hr/>       
+                 </span></div> </div>
+        ))}
+      </div> {discountError && <p className="bg-danger p-2 coupon-message" >{discountError}</p>}</div>
+     
+      <div className="address-form">
+      <h4>Delivery Address</h4>
+        {showAddress()}
+        </div>
+      </div>
+      <div className="col-md-1"></div>
+      <div className="col-md-4 sumary-checkout">
         <h4>Order Summary</h4>
         <hr />
-        <p>Products {products.length}</p>
+        <p>You have {products.length} product</p>
         <hr />
         {showProductSummary()}
         <hr />
-        <p>Cart Total: {total}</p>
+        <p style={{fontWeight:"bold", color: "white", backgroundColor:"red", padding: "5px"}}>Cart Total: {total}</p>
 
         {totalAfterDiscount > 0 && (
           <p className="bg-success p-2">
@@ -193,7 +216,7 @@ const Checkout = ({ history }) => {
                 disabled={!addressSaved || !products.length}
                 onClick={createCashOrder}
               >
-                Place Order
+                Complete Order
               </button>
             ) : (
               <button
@@ -205,16 +228,8 @@ const Checkout = ({ history }) => {
               </button>
             )}
           </div>
-
-          <div className="col-md-6">
-            <button
-              disabled={!products.length}
-              onClick={emptyCart}
-              className="btn btn-primary"
-            >
-              Empty Cart
-            </button>
-          </div>
+          <div className="col-md-1"></div>
+         
         </div>
       </div>
     </div>

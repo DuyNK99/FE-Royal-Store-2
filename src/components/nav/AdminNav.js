@@ -1,52 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { Menu} from "antd";
+import "../../App.css"
+const { SubMenu, Item } = Menu;
+const AdminNav = () => {
 
-const AdminNav = () => (
-  <nav>
-    <ul className="nav flex-column">
-      <li className="nav-item">
-        <Link to="/admin/dashboard" className="nav-link">
-          Dashboard
-        </Link>
-      </li>
-
-      <li className="nav-item">
-        <Link to="/admin/product" className="nav-link">
-          Product
-        </Link>
-      </li>
-
-      <li className="nav-item">
-        <Link to="/admin/products" className="nav-link">
-          Products
-        </Link>
-      </li>
-
-      <li className="nav-item">
-        <Link to="/admin/category" className="nav-link">
-          Category
-        </Link>
-      </li>
-
-      <li className="nav-item">
-        <Link to="/admin/sub" className="nav-link">
-          Sub Category
-        </Link>
-      </li>
-
-      <li className="nav-item">
-        <Link to="/admin/coupon" className="nav-link">
-          Coupon
-        </Link>
-      </li>
-
-      <li className="nav-item">
-        <Link to="/user/password" className="nav-link">
-          Password
-        </Link>
-      </li>
-    </ul>
-  </nav>
-);
+  return (
+    <nav>
+      <Menu
+        mode="horizontal"
+        className="d-flex justify-content-center admin-nav-menu"
+        style={{marginTop:"5px", backgroundColor:"rgb(9,58, 84,0.9)",position:"fixed", zIndex:"1",left:"30%"}}
+      >
+        <Item>
+          {" "}
+          <Link to="/admin/dashboard" className="" style={{fontSize:"18px", color:"white"}}>
+            Order Dashboard
+          </Link>
+        </Item>
+        <SubMenu
+          title="Product"
+          style={{fontSize:"18px",color:"white"}}
+        >
+          <Item >
+            <Link to="/admin/product" className="" style={{fontSize:"18px"}}>
+              Create Product
+            </Link>
+          </Item>
+          <Item>
+            <Link to="/admin/products" className="" style={{fontSize:"18px"}}>
+              List Products
+            </Link>
+          </Item>
+        </SubMenu>
+        <SubMenu
+          
+          title="Category"
+          style={{fontSize:"18px",color:"white"}}
+        >
+          <Item>
+            <Link to="/admin/category" className="" style={{fontSize:"18px"}}>
+              Create Category
+            </Link>
+          </Item>
+          <Item>
+            <Link to="/admin/sub" className="" style={{fontSize:"18px"}}>
+              Create Sub Category
+            </Link>
+          </Item>
+        </SubMenu>
+        <Item >
+          <Link to="/admin/coupon" className="" style={{fontSize:"18px",color:"white"}}>
+            CreateCoupon
+          </Link>
+        </Item>
+      </Menu>
+    </nav>
+  );
+};
 
 export default AdminNav;

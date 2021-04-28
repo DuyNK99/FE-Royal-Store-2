@@ -234,8 +234,7 @@ const Shop = () => {
     <div className="container-fluid">
       <div className="row">
         <div className="col-md-3 pt-2">
-          <h4>Search/Filter</h4>
-          <hr />
+          <h4 >Filter</h4>
 
           <Menu
             defaultOpenKeys={["1", "2", "3", "4", "5", "6", "7"]}
@@ -245,8 +244,8 @@ const Shop = () => {
             <SubMenu
               key="1"
               title={
-                <span className="h6">
-                  <DollarOutlined /> Price
+                <span className="h6-shop">
+                   Price
                 </span>
               }
             >
@@ -266,8 +265,8 @@ const Shop = () => {
             <SubMenu
               key="2"
               title={
-                <span className="h6">
-                  <DownSquareOutlined /> Categories
+                <span className="h6-shop">
+                   Categories
                 </span>
               }
             >
@@ -278,8 +277,8 @@ const Shop = () => {
             <SubMenu
               key="4"
               title={
-                <span className="h6">
-                  <DownSquareOutlined /> Sub Categories
+                <span className="h6-shop">
+                   Sub Categories
                 </span>
               }
             >
@@ -293,8 +292,8 @@ const Shop = () => {
             <SubMenu
               key="6"
               title={
-                <span className="h6">
-                  <DownSquareOutlined /> Materials
+                <span className="h6-shop">
+                  Materials
                 </span>
               }
             >
@@ -307,8 +306,8 @@ const Shop = () => {
             <SubMenu
               key="7"
               title={
-                <span className="h6">
-                  <DownSquareOutlined /> Shipping
+                <span className="h6-shop">
+                  Shipping
                 </span>
               }
             >

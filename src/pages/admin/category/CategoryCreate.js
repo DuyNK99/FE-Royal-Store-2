@@ -73,10 +73,13 @@ const CategoryCreate = () => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-md-2">
+        <div className="col">
           <AdminNav />
         </div>
-        <div className="col">
+        </div>
+        <div className="row" style={{marginTop:"80px"}}>
+          <div className="col-md-2"></div>
+        <div className="col-md-8">
           {loading ? (
             <h4 className="text-danger">Loading..</h4>
           ) : (
@@ -110,7 +113,8 @@ const CategoryCreate = () => {
             </div>
           ))}
         </div>
-      </div>
+        <div className="col-md-2"></div>
+        </div>
     </div>
   );
 };

@@ -6,7 +6,7 @@ import { getCategories } from "../../../functions/category";
 import { createSub, removeSub, getSubs } from "../../../functions/sub";
 import { Link } from "react-router-dom";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import CategoryForm from "../../../components/forms/CategoryForm";
+import SubcategoryForm from "../../../components/forms/SubcategoryForm";
 import LocalSearch from "../../../components/forms/LocalSearch";
 
 const SubCreate = () => {
@@ -75,18 +75,22 @@ const SubCreate = () => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-md-2">
+        <div className="col">
           <AdminNav />
         </div>
-        <div className="col">
+      </div>
+      <div className="row">
+        <div className="col-md-2"></div>
+        <div className="col-md-8" style={{marginTop:"80px"}}>
           {loading ? (
             <h4 className="text-danger">Loading..</h4>
           ) : (
             <h4>Create sub category</h4>
           )}
 
-          <div className="form-group">
-            <label>Parent category</label>
+          <div className="form-group cate-inputform" >
+            <br/>
+            <label style={{fontWeight:"bold"}}>Choose the parent category</label>
             <select
               name="category"
               className="form-control"
@@ -102,10 +106,11 @@ const SubCreate = () => {
             </select>
           </div>
 
-          <CategoryForm
+          <SubcategoryForm
             handleSubmit={handleSubmit}
             name={name}
             setName={setName}
+            
           />
 
           {/* step 2 and step 3 */}
@@ -129,6 +134,7 @@ const SubCreate = () => {
             </div>
           ))}
         </div>
+        <div className="col-md-2"></div>
       </div>
     </div>
   );

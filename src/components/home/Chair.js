@@ -25,7 +25,7 @@ const CategoryHome = ({ match }) => {
 
   useEffect(() => {
     setLoading(true);
-    getCategory('chair').then((res) => {
+    getCategory('chairs').then((res) => {
       console.log(JSON.stringify(res.data, null, 4));
       setCategory(res.data.category);
       setProducts(res.data.products);

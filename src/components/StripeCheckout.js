@@ -5,8 +5,8 @@ import { createPaymentIntent } from "../functions/stripe";
 import { Link } from "react-router-dom";
 import { Card } from "antd";
 import { DollarOutlined, CheckOutlined} from "@ant-design/icons";
-import Laptop from "../images/bugatti-divo-red-performance-ac.jpg";
 import { createOrder, emptyUserCart } from "../functions/user";
+import { toast } from "react-toastify";
 
 const StripeCheckout = ({ history }) => {
   const dispatch = useDispatch();
@@ -78,6 +78,7 @@ const StripeCheckout = ({ history }) => {
       setError(null);
       setProcessing(false);
       setSucceeded(true);
+      toast.success("Payment successful, cart empty.");
     }
   };
 
@@ -108,38 +109,9 @@ const StripeCheckout = ({ history }) => {
 
   return (
     <>
-      {!succeeded && (
-        <div>
-          {coupon && totalAfterDiscount !== undefined ? (
-            <p className="alert alert-success">{`Total after discount: $${totalAfterDiscount}`}</p>
-          ) : (
-            <p className="alert alert-danger">No coupon applied</p>
-          )}
-        </div>
-      )}
+      
       <div className="text-center pb-5">
-        <Card
-          cover={
-            <img
-              src={Laptop}
-              style={{
-                height: "200px",
-                objectFit: "cover",
-                marginBottom: "-50px",
-              }}
-            />
-          }
-          actions={[
-            <>
-              <DollarOutlined className="text-info" /> <br /> Total: $
-              {cartTotal}
-            </>,
-            <>
-              <CheckOutlined className="text-info" /> <br /> Total payable : $
-              {(payable / 100).toFixed(2)}
-            </>,
-          ]}
-        />
+       
       </div>
 
       <form id="payment-form" className="stripe-form" onSubmit={handleSubmit}>
@@ -163,6 +135,28 @@ const StripeCheckout = ({ history }) => {
           </div>
         )}
         <br />
+        {!succeeded && (
+        <div>
+          {coupon && totalAfterDiscount !== undefined ? (
+            <p className="alert alert-success">{`Total after discount: $${totalAfterDiscount}`}</p>
+          ) : (
+            <p className="alert alert-danger">No coupon applied</p>
+          )}
+           <Card
+        
+        actions={[
+          <>
+            <DollarOutlined className="text-info" /> <br /> Total: $
+            {cartTotal}
+          </>,
+          <>
+            <CheckOutlined className="text-info" /> <br /> Total payable : $
+            {(payable / 100).toFixed(2)}
+          </>,
+        ]}
+      />
+        </div>
+      )}
         <p className={succeeded ? "result-message" : "result-message hidden"}>
           Payment Successful.{" "}
           <Link to="/user/history">See it in your purchase history.</Link>
